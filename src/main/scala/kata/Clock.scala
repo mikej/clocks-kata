@@ -2,29 +2,30 @@ package kata
 
 class Clock {
 
-  def hourInWords(hour: Int) = Clock.HOURS_IN_WORDS(hour % 12)
+  def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
 
-  def suffix(hour: Int) = if (hour < 12) "am" else "pm"
+  def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
 
-  def minutesInWords(minutes: Int): String = {
+  def minutesInWords(minutes: Int): Option[String] = {
     minutes match {
-      case 0 => ""
+      case 0 => None
       case minutes if minutes >= 20 => {
         val Array(tens, units) = Array(minutes / 10, minutes % 10)
         if (units == 0) {
-          s" ${Clock.TENS(tens)}"
+          Some(Clock.TENS(tens))
         } else {
-          s" ${Clock.TENS(tens)} ${Clock.MINUTES_IN_WORDS(units)}"
+          Some(s"${Clock.TENS(tens)} ${Clock.MINUTES_IN_WORDS(units)}")
         }
       }
-      case minutes if 10 until 19 contains minutes => s" ${Clock.MINUTES_IN_WORDS(minutes)}"
-      case minutes => s" oh ${Clock.MINUTES_IN_WORDS(minutes)}"
+      case minutes if 10 until 19 contains minutes => Some(Clock.MINUTES_IN_WORDS(minutes))
+      case minutes => Some(s"oh ${Clock.MINUTES_IN_WORDS(minutes)}")
     }
   }
 
   def timeInWords(str: String) = {
     val Array(hour, minutes) = str.split(":").map(_.toInt)
-    s"${hourInWords(hour)}${minutesInWords(minutes)} ${suffix(hour)}"
+    val parts = List(hourInWords(hour), minutesInWords(minutes), suffix(hour))
+    parts.flatten.mkString(" ")
   }
 }
 
