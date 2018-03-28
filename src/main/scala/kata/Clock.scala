@@ -6,7 +6,9 @@ class Clock {
   private def minutesInWords(minutes: Int): Option[String] = {
     minutes match {
       case 0 => None
-      case minutes if minutes >= 20 => {
+      case minutes if minutes <= 9 => Some(s"oh ${Clock.MINUTES_IN_WORDS(minutes)}")
+      case minutes if 10 until 19 contains minutes => Some(Clock.MINUTES_IN_WORDS(minutes))
+      case minutes => {
         val Array(tens, units) = Array(minutes / 10, minutes % 10)
         if (units == 0) {
           Some(Clock.TENS(tens))
@@ -14,8 +16,6 @@ class Clock {
           Some(s"${Clock.TENS(tens)} ${Clock.MINUTES_IN_WORDS(units)}")
         }
       }
-      case minutes if 10 until 19 contains minutes => Some(Clock.MINUTES_IN_WORDS(minutes))
-      case minutes => Some(s"oh ${Clock.MINUTES_IN_WORDS(minutes)}")
     }
   }
 
