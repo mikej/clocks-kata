@@ -1,9 +1,9 @@
 package kata
 
 class Clock {
-  def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
+  private def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
 
-  def minutesInWords(minutes: Int): Option[String] = {
+  private def minutesInWords(minutes: Int): Option[String] = {
     minutes match {
       case 0 => None
       case minutes if minutes >= 20 => {
@@ -19,7 +19,7 @@ class Clock {
     }
   }
 
-  def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
+  private def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
 
   def timeInWords(str: String) = {
     val Array(hour, minutes) = str.split(":").map(_.toInt)
