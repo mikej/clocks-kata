@@ -3,7 +3,7 @@ package kata
 class Clock {
   private def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
 
-  private def minutesInWords(minutes: Int): Option[String] = {
+  private def minutesInWords(minutes: Int) = {
     minutes match {
       case 0 => None
       case minutes if minutes <= 9 => Some(s"oh ${Clock.MINUTES_IN_WORDS(minutes)}")
