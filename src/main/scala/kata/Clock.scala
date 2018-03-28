@@ -69,8 +69,8 @@ object Clock {
   )
 
   val TENS = Array(
-    "",
-    "",
+    null,
+    null,
     "twenty",
     "thirty",
     "forty",
