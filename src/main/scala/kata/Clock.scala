@@ -1,7 +1,6 @@
 package kata
 
 class Clock {
-
   def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
 
   def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
