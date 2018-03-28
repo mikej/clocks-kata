@@ -3,8 +3,6 @@ package kata
 class Clock {
   def hourInWords(hour: Int) = Some(Clock.HOURS_IN_WORDS(hour % 12))
 
-  def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
-
   def minutesInWords(minutes: Int): Option[String] = {
     minutes match {
       case 0 => None
@@ -20,6 +18,8 @@ class Clock {
       case minutes => Some(s"oh ${Clock.MINUTES_IN_WORDS(minutes)}")
     }
   }
+
+  def suffix(hour: Int) = Some(if (hour < 12) "am" else "pm")
 
   def timeInWords(str: String) = {
     val Array(hour, minutes) = str.split(":").map(_.toInt)
